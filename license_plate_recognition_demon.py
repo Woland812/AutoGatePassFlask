@@ -132,7 +132,7 @@ def license_plate_recognition_daemon():
 
                                                     cv2.imwrite(f'static/img/original_{hash_file_name}.png', frame)
                                                     cv2.imwrite(f'static/img/carplate_{hash_file_name}.png', carplate_extract_img_gray)
-                                                    open_gate()
+                                                    # open_gate()
                 i += 1
 
             fps = video_capture.get(cv2.CAP_PROP_FPS)

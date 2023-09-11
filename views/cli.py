@@ -11,8 +11,8 @@ cli = Blueprint('admin', __name__)
 
 @cli.cli.command('create')
 @click.argument('username')
-@click.argument('password')
-def create(username, password):
+def create(username):
+    password = click.prompt('Пароль', hide_input=True, confirmation_prompt=True)
     hashed_password = generate_password_hash(password)
 
     admin = User(username=username, password_hash=hashed_password, type=1)
@@ -30,9 +30,9 @@ def init_db():
 
 @cli.cli.command('init_settings')
 def init_settings():
+    gate_phone_input = input("Введите телефонный номер шлагбаума: ")
     api_key_input = input("Введите API ключ: ")
-    gate_phone_input = input("Введите номер шлагбаума: ")
-    campaign_id_input = input("Введите ID кампании: ")
+    campaign_id_input = input("Введите ID кампании в сервисе zvonok: ")
     camera_url_input = input("Введите URL камеры: ")
     api_key = AdminSetting.query.filter_by(key='zvonok_api_key').first()
     gate_phone = AdminSetting.query.filter_by(key='gate_phone').first()

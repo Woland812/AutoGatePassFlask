@@ -51,7 +51,13 @@ def edit(user_id):
 @admin_required
 def delete(user_id):
     user = User.query.get_or_404(user_id)
-    return render_template('users/delete.html', user=user)
+    if user.type == constants.USER_TYPE_ADMIN:
+        flash('Нельзя изменить удалить администратора', 'danger')
+    else:
+        db.session.delete(user)
+        db.session.commit()
+        flash('пользователя успешно удален', 'success')
+    return redirect(url_for('users.index'))
 
 
 @users.route('/users/create', methods=['GET', 'POST'])
