@@ -105,10 +105,10 @@ def license_plate_recognition_daemon():
                                             (len(result_str) == 8 or result_str[8].isdigit()):
                                         if result_str not in arr_success or time.time() - arr_success[result_str] > constants.CAR_NUMBER_DETECTION_TIMEOUT:
                                             arr_success[result_str] = time.time()
-                                            print(i, result[1], result[2])
                                             car_number = CarNumber.query.filter_by(car_number=result_str).first()
                                             if car_number:
-                                                if car_number.status == constants.CAR_NUMBER_STATUS_ACTIVE and (
+                                                if car_number.user.status == constants.USER_STATUS_ACTIVE and \
+                                                        car_number.status == constants.CAR_NUMBER_STATUS_ACTIVE and (
                                                         car_number.type == constants.CAR_NUMBER_TYPE_PERMANENT or
                                                         (
                                                             car_number.type == constants.CAR_NUMBER_TYPE_TEMPORARY and
