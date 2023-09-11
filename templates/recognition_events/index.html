@@ -1,0 +1,31 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}События распознания{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>События распознания</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Пользователь</th>
+                <th>Номер машины</th>
+                <th>Фото</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ event.car_number.user.username }}</td>
+                <td>{{ event.car_number.car_number }}</td>
+                <td><img src="static/img/original_{{ event.hash_name }}.png" style="max-width:30%"/></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ pagination.links }}
+</div>
+{% endblock %}

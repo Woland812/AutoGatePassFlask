@@ -1,0 +1,53 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Номера авто{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Номера авто</h2>
+    <a href="{{ url_for('car_numbers.create') }}" class="btn btn-success mb-2">Добавить номер</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя пользователя</th>
+                <th>Номер</th>
+                <th>Авто</th>
+                <th>Тип</th>
+                <th>Статус</th>
+                <th>Срок действия</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car_number in cars_number %}
+            <tr>
+                <td>{{ car_number.user.username }}</td>
+                <td>{{ car_number.car_number }}</td>
+                <td>{{ car_number.car_info }}</td>
+                <td>{{ type_mapping[car_number.type] }}</td>
+                <td>
+                    <div class="status-container">
+                        <span class="status-icon {{'active' if car_number.status else 'blocked' }}"></span>
+                    </div>
+                </td>
+                <td>{{ car_number.date_start.strftime('%Y-%m-%d') }} - {{ car_number.date_end.strftime('%Y-%m-%d') if car_number.date_end }}</td>
+                <td>
+                    <a href="{{ url_for('car_numbers.view', number_id=car_number.id) }}" class="btn btn-primary btn-sm">Просмотр</a>
+                    <a href="{{ url_for('car_numbers.edit', number_id=car_number.id) }}" class="btn btn-warning btn-sm">Редактировать</a>
+                    {% if current_user.is_admin %}
+                    <a href="{{ url_for('car_numbers.toggle_status', number_id=car_number.id) }}" class="btn btn-danger btn-sm">
+                        {% if car_number.status == 1 %}
+                            Заблокировать
+                        {% else %}
+                            Разблокировать
+                        {% endif %}
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('car_numbers.delete', number_id=car_number.id) }}" class="btn btn-danger btn-sm">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

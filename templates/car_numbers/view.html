@@ -1,0 +1,17 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Номер авто{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Номер авто</h2>
+    <p><strong>Номер:</strong> {{ car_number.car_number }}</p>
+    <p><strong>Пользователь:</strong> {{ car_number.user.username }}</p>
+    <p><strong>Тип:</strong> {{ type }}</p>
+    <p><strong>Статус:</strong> {{ 'Активен' if car_number.status else 'Заблокирован' }}</p>
+    <p><strong>Дополнительная информация:</strong> {{ car_number.car_info }}</p>
+    <p><strong>Дата начала действия:</strong> {{ car_number.date_start.strftime('%Y-%m-%d') }}</p>
+    <p><strong>Дата окончания действия:</strong> {{ car_number.date_end.strftime('%Y-%m-%d') if car_number.date_end else '-'}}</p>
+
+</div>
+{% endblock %}

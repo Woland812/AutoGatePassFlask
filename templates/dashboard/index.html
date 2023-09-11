@@ -1,0 +1,10 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Домашняя страница{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Добро пожаловать, {{ current_user.username }}!</h2>
+    <p>Это ваша домашняя страница.</p>
+</div>
+{% endblock %}

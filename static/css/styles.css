@@ -1,0 +1,57 @@
+.status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+}
+
+.active {
+    background-color: green;
+}
+
+.blocked {
+    background-color: red;
+}
+
+.flashes {
+    list-style: none;
+    padding: 10px;
+}
+
+.flashes li {
+    margin: 0 0 10px;
+    padding: 10px;
+}
+
+.flashes .success {
+    background-color: #dff0d8;
+    border-color: #d0e9c6;
+    color: #3c763d;
+}
+
+.flashes .info {
+    background-color: #d9edf7;
+    border-color: #bcdff1;
+    color: #31708f;
+}
+
+.flashes .warning {
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    color: #8a6d3b;
+}
+
+.flashes .danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}

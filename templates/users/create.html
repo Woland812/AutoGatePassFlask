@@ -1,0 +1,46 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Добавить пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Добавить пользователя</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.username.label }} {{ form.username(size=20, class="form-control" ~ (' is-invalid' if form.username.errors)) }}
+            {% if form.username.errors %}
+            <div class="invalid-feedback">
+                {{ form.username.errors[0] }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label }} {{ form.password(class="form-control") }}
+            {% if form.password.errors %}
+            <div class="invalid-feedback">
+                {{ form.password.errors[0] }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ form.full_name.label }} {{ form.full_name(class="form-control") }}
+
+        </div>
+        <div class="mb-3">
+            {{ form.address.label }} {{ form.address(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.phone_number.label }} {{ form.phone_number(class="form-control", id="phone_number") }}
+        </div>
+        <div class="mb-3">
+            {{ form.status.label }} {{ form.status(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.additional_info.label }} {{ form.additional_info(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+{% endblock %}
+{% block script %}{% include 'includes/phone_mask.html' %}{% endblock %}

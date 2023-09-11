@@ -1,0 +1,43 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Добавить номер{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Добавить номер</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.car_number.label }} {{ form.car_number(class="form-control" ~ (' is-invalid' if form.car_number.errors)) }}
+            {% if form.car_number.errors %}
+            <div class="invalid-feedback">
+                {{ form.car_number.errors[0] }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.type.label }} {{ form.type(class="form-control") }}
+        </div>
+        {% if current_user.is_admin %}
+        <div class="form-group">
+            {{ form.user_id.label }} {{ form.user_id(class="form-control") }}
+        </div>
+        {% else %}
+        <input type="hidden" name="user_id" value="{{ current_user.id }}">
+        {% endif %}
+        <div class="form-group">
+            {{ form.date_start.label }} {{ form.date_start(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.date_end.label }} {{ form.date_end(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.car_info.label }} {{ form.car_info(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.status.label }} {{ form.status(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+{% endblock %}

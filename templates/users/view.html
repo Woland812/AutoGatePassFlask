@@ -1,0 +1,15 @@
+{% extends 'base_admin_user.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Профиль пользователя</h2>
+    <p><strong>Логиин:</strong> {{ user.username }}</p>
+    <p><strong>Имя:</strong> {{ user.full_name }}</p>
+    <p><strong>Адрес:</strong> {{ user.address }}</p>
+    <p><strong>Номер телефона:</strong> {{ user.phone_number }}</p>
+    <p><strong>Статус:</strong> {{ 'Активен' if user.status else 'Заблокирован' }}</p>
+    <p><strong>Дополнительная информация:</strong> {{ user.additional_info }}</p>
+</div>
+{% endblock %}
