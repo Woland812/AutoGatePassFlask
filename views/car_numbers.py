@@ -58,10 +58,9 @@ def create():
 
 @car_numbers.route('/car-numbers/edit/<int:number_id>', methods=['GET', 'POST'])
 @login_required
-@admin_required
 def edit(number_id):
     car_number = CarNumber.query.get_or_404(number_id)
-    if not current_user.is_admin or car_number.user_id != current_user.id:
+    if not current_user.is_admin and car_number.user_id != current_user.id:
         flash('У вас нет прав для редактирования этого номера машины', 'danger')
         return redirect(url_for('car_numbers.index'))
     form = CreateCarNumberForm(obj=car_number)
